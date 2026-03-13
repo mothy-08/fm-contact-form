@@ -42,11 +42,35 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
 
+/* utility classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.required-icon {
+  color: var(--color-green-600);
+  margin-left: 2px;
+}
+
+/* layout & styles */
+body {
   font-family: var(--font-family);
   font-size: var(--text-base);
   font-weight: 400;
   font-style: normal;
+
+  background-color: var(--color-green-200);
+  color: var(--color-grey-900);
 }
 
 main {
@@ -55,4 +79,97 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  padding: 40px;
+  border-radius: 16px;
+
+  background-color: var(--color-white);
+  width: min(736px, calc(100vw - 8vw));
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+:is(input, textarea, .radio-wrapper) {
+  outline: 0;
+  border-radius: 8px;
+  border: 1px solid var(--color-grey-500);
+  padding: 12px 20px;
+
+  cursor: pointer;
+
+  &:focus-visible,
+  &:active {
+    border-color: var(--color-green-600);
+  }
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+
+  & > * + * {
+    margin-top: 8px;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+:is(.name-wrapper, .radio-group-wrapper, .checkbox-wrapper) {
+  display: flex;
+  gap: 16px;
+
+  &:not(.checkbox-wrapper) > * {
+    flex: 1;
+  }
+}
+
+.radio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  & > input {
+    accent-color: var(--color-green-600);
+    width: 20px;
+    height: 20px;
+  }
+
+  &:has(input:checked) {
+    background-color: var(--color-green-200);
+    border-color: var(--color-green-600);
+  }
+}
+
+input[type="checkbox"] {
+  margin-top: 2.5px;
+  accent-color: var(--color-green-600);
+  width: 18px;
+  height: 18px;
+}
+
+button {
+  font-weight: 700;
+
+  border: 0;
+  border-radius: 8px;
+  padding: 1em;
+
+  background-color: var(--color-green-600);
+  color: var(--color-white);
+
+  &:hover {
+    background-color: var(--color-grey-900);
+  }
 }

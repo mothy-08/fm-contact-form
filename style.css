@@ -111,6 +111,10 @@ h2 {
   }
 }
 
+.input-wrapper:has(.error-message:not([hidden])) :is(input, textarea) {
+  border-color: var(--color-red);
+}
+
 fieldset {
   border: 0;
   padding: 0;
@@ -150,6 +154,10 @@ fieldset {
     background-color: var(--color-green-200);
     border-color: var(--color-green-600);
   }
+
+  &:has(input:focus-visible) {
+    border-color: var(--color-green-600);
+  }
 }
 
 input[type="checkbox"] {
@@ -159,17 +167,95 @@ input[type="checkbox"] {
   height: 18px;
 }
 
+.checkbox-group-wrapper > * + * {
+  margin-top: 8px;
+}
+
+.error-message:not([hidden]) {
+  color: var(--color-red);
+}
+
 button {
   font-weight: 700;
 
   border: 0;
+  outline: 1px solid var(--color-green-600);
   border-radius: 8px;
   padding: 1em;
 
   background-color: var(--color-green-600);
   color: var(--color-white);
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background-color: var(--color-grey-900);
+  }
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 1px solid var(--color-green-600);
+}
+
+.toast {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+
+  transform: translateY(-80px);
+  opacity: 0;
+  transition:
+    transform 0.2s ease-in,
+    opacity 0.15s ease-in;
+
+  width: 450px;
+  height: 107px;
+
+  margin-inline: auto;
+  padding: 24px;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  background-color: var(--color-grey-900);
+  color: var(--color-white);
+
+  &.show {
+    transform: translateY(0);
+    opacity: 1;
+    transition:
+      transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.2s ease-out;
+  }
+
+  h2 {
+    position: relative;
+    font-size: 1.125rem;
+    padding-inline-start: 32px;
+  }
+
+  h2::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin-block: auto;
+
+    width: 20px;
+    height: 20px;
+
+    background-image: url("assets/images/icon-success-check.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  p {
+    color: var(--color-green-200);
   }
 }

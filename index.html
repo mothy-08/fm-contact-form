@@ -11,12 +11,13 @@
     />
     <title>Contact form</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
   </head>
   <body>
     <main>
       <section aria-labelledby="main-heading">
         <h1 id="main-heading" class="sr-only">Contact Form</h1>
-        <form>
+        <form id="contact-form" novalidate>
           <h2>Contact Us</h2>
 
           <div class="name-wrapper">
@@ -26,7 +27,17 @@
                 <span aria-hidden="true" class="required-icon">*</span>
                 <span class="sr-only">This field is required</span>
               </label>
+
               <input id="first-name" name="first-name" type="text" required />
+
+              <p
+                class="error-message"
+                aria-live="polite"
+                aria-invalid="true"
+                hidden
+              >
+                This field is required
+              </p>
             </div>
 
             <div class="input-wrapper">
@@ -35,7 +46,17 @@
                 <span aria-hidden="true" class="required-icon">*</span>
                 <span class="sr-only">This field is required</span>
               </label>
+
               <input id="last-name" name="last-name" type="text" required />
+
+              <p
+                class="error-message"
+                aria-live="polite"
+                aria-invalid="true"
+                hidden
+              >
+                This field is required
+              </p>
             </div>
           </div>
 
@@ -45,7 +66,17 @@
               <span aria-hidden="true" class="required-icon">*</span>
               <span class="sr-only">This field is required</span>
             </label>
+
             <input id="email" name="email" type="email" required />
+
+            <p
+              class="error-message"
+              aria-live="polite"
+              aria-invalid="true"
+              hidden
+            >
+              Please enter a valid email address
+            </p>
           </div>
 
           <fieldset>
@@ -78,6 +109,15 @@
                 Support Request
               </label>
             </div>
+
+            <p
+              class="error-message"
+              aria-live="polite"
+              aria-invalid="true"
+              hidden
+            >
+              Please select a query type
+            </p>
           </fieldset>
 
           <div class="input-wrapper">
@@ -86,21 +126,41 @@
               <span aria-hidden="true" class="required-icon">*</span>
               <span class="sr-only">This field is required</span>
             </label>
+
             <textarea name="message" id="message" required></textarea>
+
+            <p
+              class="error-message"
+              aria-live="polite"
+              aria-invalid="true"
+              hidden
+            >
+              This field is required
+            </p>
           </div>
 
-          <div class="checkbox-wrapper">
-            <input
-              id="consent-checkbox"
-              name="consent-checkbox"
-              type="checkbox"
-              required
-            />
-            <label for="consent-checkbox">
-              I consent to being contacted by the team
-              <span aria-hidden="true" class="required-icon">*</span>
-              <span class="sr-only">This field is required</span>
-            </label>
+          <div class="checkbox-group-wrapper">
+            <div class="checkbox-wrapper">
+              <input
+                id="consent-checkbox"
+                name="consent-checkbox"
+                type="checkbox"
+                required
+              />
+              <label for="consent-checkbox">
+                I consent to being contacted by the team
+                <span aria-hidden="true" class="required-icon">*</span>
+                <span class="sr-only">This field is required</span>
+              </label>
+            </div>
+            <p
+              class="error-message"
+              aria-live="polite"
+              aria-invalid="true"
+              hidden
+            >
+              To submit this form, please consent to being contacted
+            </p>
           </div>
 
           <button type="submit">Submit</button>

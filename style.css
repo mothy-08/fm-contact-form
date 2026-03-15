@@ -122,6 +122,10 @@ fieldset {
   }
 }
 
+textarea {
+  resize: none;
+}
+
 .input-wrapper:has(.error-message:not([hidden])) :is(input, textarea) {
   border-color: var(--color-red);
 }

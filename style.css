@@ -35,13 +35,8 @@
   font: inherit;
 }
 
-:is(p, h1, h2) {
+:is(h1, p) {
   overflow-wrap: break-word;
-}
-
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 /* utility classes */
@@ -64,6 +59,9 @@ body {
 
 /* layout & styles */
 body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+
   font-family: var(--font-family);
   font-size: var(--text-base);
   font-weight: 400;
@@ -75,6 +73,10 @@ body {
 
 main {
   min-height: 100svh;
+  width: min(736px, 90%);
+
+  margin-inline: auto;
+  padding-block: 30px;
 
   display: flex;
   justify-content: center;
@@ -82,6 +84,7 @@ main {
 }
 
 form {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -90,20 +93,19 @@ form {
   border-radius: 16px;
 
   background-color: var(--color-white);
-  width: min(736px, calc(100vw - 8vw));
 }
 
-h2 {
+h1 {
   font-size: 2rem;
 }
 
-:is(input, textarea, .radio-wrapper) {
+:is(input, .radio-wrapper, textarea) {
   outline: 0;
-  border-radius: 8px;
-  border: 1px solid var(--color-grey-500);
-  padding: 12px 20px;
 
-  cursor: pointer;
+  border: 1px solid var(--color-grey-500);
+  border-radius: 8px;
+
+  padding: 12px 20px;
 
   &:focus-visible,
   &:active {
@@ -111,17 +113,17 @@ h2 {
   }
 }
 
-.input-wrapper:has(.error-message:not([hidden])) :is(input, textarea) {
-  border-color: var(--color-red);
-}
-
 fieldset {
   border: 0;
   padding: 0;
 
-  & > * + * {
+  > * + * {
     margin-top: 8px;
   }
+}
+
+.input-wrapper:has(.error-message:not([hidden])) :is(input, textarea) {
+  border-color: var(--color-red);
 }
 
 .input-wrapper {
@@ -132,6 +134,7 @@ fieldset {
 
 :is(.name-wrapper, .radio-group-wrapper, .checkbox-wrapper) {
   display: flex;
+  align-items: center;
   gap: 16px;
 
   &:not(.checkbox-wrapper) > * {
@@ -140,12 +143,15 @@ fieldset {
 }
 
 .radio-wrapper {
+  cursor: pointer;
+
   display: flex;
   align-items: center;
   gap: 12px;
 
   & > input {
     accent-color: var(--color-green-600);
+
     width: 20px;
     height: 20px;
   }
@@ -161,10 +167,12 @@ fieldset {
 }
 
 input[type="checkbox"] {
-  margin-top: 2.5px;
   accent-color: var(--color-green-600);
+
   width: 18px;
   height: 18px;
+
+  margin-top: 2.5px;
 }
 
 .checkbox-group-wrapper > * + * {
@@ -175,11 +183,18 @@ input[type="checkbox"] {
   color: var(--color-red);
 }
 
+textarea {
+  min-height: 240px;
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 1px solid var(--color-green-600);
+}
+
 button {
   font-weight: 700;
 
   border: 0;
-  outline: 1px solid var(--color-green-600);
   border-radius: 8px;
   padding: 1em;
 
@@ -192,12 +207,8 @@ button {
   }
 }
 
-input[type="checkbox"]:focus-visible {
-  outline: 1px solid var(--color-green-600);
-}
-
 .toast {
-  position: absolute;
+  position: fixed;
   top: 24px;
   left: 0;
   right: 0;
@@ -208,8 +219,8 @@ input[type="checkbox"]:focus-visible {
     transform 0.2s ease-in,
     opacity 0.15s ease-in;
 
-  width: 450px;
-  height: 107px;
+  width: min(450px, 100%);
+  min-height: 107px;
 
   margin-inline: auto;
   padding: 24px;
@@ -230,32 +241,39 @@ input[type="checkbox"]:focus-visible {
       transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
       opacity 0.2s ease-out;
   }
+}
 
-  h2 {
-    position: relative;
-    font-size: 1.125rem;
-    padding-inline-start: 32px;
-  }
+.toast-title {
+  position: relative;
+  font-size: 1.125rem;
+  padding-inline-start: 32px;
+}
 
-  h2::before {
-    content: "";
+.toast-title::before {
+  content: "";
 
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin-block: auto;
+  width: 20px;
+  height: 20px;
 
-    width: 20px;
-    height: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin-block: auto;
 
-    background-image: url("assets/images/icon-success-check.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+  background-image: url("assets/images/icon-success-check.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
-  p {
-    color: var(--color-green-200);
+.toast-description {
+  color: var(--color-green-200);
+}
+
+@media (max-width: 48rem) {
+  :is(.name-wrapper, .radio-group-wrapper) {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
